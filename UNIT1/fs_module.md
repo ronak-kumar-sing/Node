@@ -255,7 +255,7 @@ const fs = require('fs');
 function logMessage(message) {
   const timestamp = new Date().toISOString();
   const logEntry = `[${timestamp}] ${message}\n`;
-  
+
   fs.appendFile('app.log', logEntry, (err) => {
     if (err) throw err;
     console.log('Log entry added');
@@ -426,7 +426,7 @@ const fs = require('fs');
 
 fs.readdir('.', { withFileTypes: true }, (err, entries) => {
   if (err) throw err;
-  
+
   entries.forEach(entry => {
     if (entry.isDirectory()) {
       console.log(`📁 ${entry.name}/`);
@@ -471,7 +471,7 @@ fs.stat('test.txt', (err, stats) => {
     console.error('Error:', err.message);
     return;
   }
-  
+
   console.log('File Stats:');
   console.log('Size:', stats.size, 'bytes');
   console.log('Created:', stats.birthtime);
@@ -632,13 +632,13 @@ async function processFiles() {
   try {
     // Read file
     const data = await fs.readFile('input.txt', 'utf8');
-    
+
     // Process data
     const processed = data.toUpperCase();
-    
+
     // Write file
     await fs.writeFile('output.txt', processed);
-    
+
     console.log('File processed successfully!');
   } catch (err) {
     console.error('Error:', err.message);
@@ -662,7 +662,7 @@ async function readMultipleFiles() {
       fs.readFile('file2.txt', 'utf8'),
       fs.readFile('file3.txt', 'utf8')
     ]);
-    
+
     console.log('File 1:', file1);
     console.log('File 2:', file2);
     console.log('File 3:', file3);
@@ -687,13 +687,13 @@ class Logger {
   constructor(logFile) {
     this.logFile = logFile;
   }
-  
+
   log(message) {
     const timestamp = new Date().toISOString();
     const entry = `[${timestamp}] INFO: ${message}\n`;
     fs.appendFileSync(this.logFile, entry);
   }
-  
+
   error(message) {
     const timestamp = new Date().toISOString();
     const entry = `[${timestamp}] ERROR: ${message}\n`;
@@ -740,9 +740,9 @@ function backupFile(filePath) {
   const ext = path.extname(filePath);
   const name = path.basename(filePath, ext);
   const dir = path.dirname(filePath);
-  
+
   const backupPath = path.join(dir, `${name}_backup_${timestamp}${ext}`);
-  
+
   fs.copyFile(filePath, backupPath, (err) => {
     if (err) {
       console.error('Backup failed:', err.message);
@@ -765,7 +765,7 @@ const path = require('path');
 
 function scanDirectory(dirPath, indent = '') {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
-  
+
   entries.forEach(entry => {
     if (entry.isDirectory()) {
       console.log(`${indent}📁 ${entry.name}/`);
@@ -791,7 +791,7 @@ function parseCSV(filePath) {
   const data = fs.readFileSync(filePath, 'utf8');
   const lines = data.trim().split('\n');
   const headers = lines[0].split(',');
-  
+
   const records = lines.slice(1).map(line => {
     const values = line.split(',');
     const record = {};
@@ -800,7 +800,7 @@ function parseCSV(filePath) {
     });
     return record;
   });
-  
+
   return records;
 }
 
@@ -912,13 +912,13 @@ const filePath = '/data/file.txt';
 > **The fs module is a core Node.js module for performing file and directory operations. It supports both synchronous and asynchronous methods for reading, writing, appending, renaming, deleting files, and managing directories. Asynchronous file operations are preferred because they are non-blocking. For large files, streams should be used to handle data efficiently.**
 
 ### Key Takeaways:
-✅ Core module - no installation required  
-✅ Async methods are non-blocking (preferred)  
-✅ Sync methods block the event loop  
-✅ Use streams for large files  
-✅ Error-first callback pattern  
-✅ fs.promises for async/await  
-✅ Always handle errors  
+✅ Core module - no installation required
+✅ Async methods are non-blocking (preferred)
+✅ Sync methods block the event loop
+✅ Use streams for large files
+✅ Error-first callback pattern
+✅ fs.promises for async/await
+✅ Always handle errors
 
 ---
 
